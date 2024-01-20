@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars | Translater</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body class="bg-dark">
+
+    <div class="container d-flex justify-content-center main_div">
+        <form method="post" class="card w-50">
+            {% csrf_token %}
+            <div class="lang d-flex justify-content-between p-2">
+                <select class="form-select" name="in_lang" id="">
+                    <option value="uz" {% if in_lang == 'uz' %}selected{% endif %}>UZ</option>
+                    <option value="ru" {% if in_lang == 'ru' %}selected{% endif %}>RU</option>
+                    <option value="en" {% if in_lang == 'en' %}selected{% endif %}>EN</option>
+                </select>
+                <select class="form-select" name="to_lang" id="">
+                    <option value="en" {% if to_lang == 'en' %}selected{% endif %}>EN</option>
+                    <option value="uz" {% if to_lang == 'uz' %}selected{% endif %}>UZ</option>
+                    <option value="ru" {% if to_lang == 'ru' %}selected{% endif %}>RU</option>
+                </select>
+            </div>
+            <div class="area d-flex">
+                <textarea required class="form-control" name="text" cols="30" rows="10" placeholder="Enter text...">{{ old_text }}</textarea>
+                <textarea class="form-control" disabled cols="30" rows="10" placeholder="Result...">{{ result_text }}</textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success">Translate</button>
+        </form>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="{% static 'main.js' %}"></script>
+</body>
+</html>
